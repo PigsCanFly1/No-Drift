@@ -1,0 +1,36 @@
+License
+
+==============================================================================
+NO-DRIFT API PUBLIC EVALUATION & COMMERCIAL COMPLIANCE LICENSE
+Copyright (c) 2026 Mozart Software Architects & Muhammad Abdullah
+==============================================================================
+
+Subject to the terms and conditions of this License, Licensor (Mozart Software 
+Architects and Muhammad Abdullah) hereby grants to you a worldwide, royalty-free, 
+non-exclusive license to use, reproduce, modify, display, and perform the 
+No-Drift API, dashboard, and test suite software under the following terms:
+
+1. PERMITTED USES (Open Source, Research, & Testing)
+   You may use, modify, and test this software for personal, educational, 
+   academic research, non-commercial testing, or fully open-source public 
+   utility workflows without fee.
+
+2. COMMERCIAL RESTRICTIONS & MONETIZATION
+   Any commercial utilization, production deployment within a revenue-generating 
+   enterprise, or incorporation of this software into a paid Software-as-a-Service 
+   (SaaS) product is strictly prohibited under this public grant. 
+   
+   To utilize the No-Drift API, dashboard, or test suite for commercial purposes, 
+   or to deploy modified variants commercially, users must apply for and obtain a 
+   separate, paid Commercial Production License explicitly issued by Mozart Software 
+   Architects and Muhammad Abdullah.
+
+3. INBOUND CONTRIBUTIONS & ROYALTY-FREE RIGHTS
+   By submitting any modification, pull request, bug fix, or contribution to this 
+   repository, you hereby grant Mozart Software Architects and Muhammad Abdullah a 
+   perpetual, irrevocable, worldwide, royalty-free, fully sub-licensable right to 
+   use, modify, copy, distribute, publicize, and commercially exploit those 
+   contributions and modifications without restriction, compensation, or credit 
+   obligations to you.
+
+==============================================================================

@@ -1,0 +1,91 @@
+run_all_tests.py
+
+
+"""
+No-Drift API & Dashboard - E2E Test Suite
+Copyright (c) 2026 Mozart Software Architects & Muhammad Abdullah
+Licensed under the Custom Public Evaluation & Commercial Compliance License.
+"""
+
+import sys
+import subprocess
+import time
+from fastapi.testclient import TestClient
+
+try:
+    from main import app, calculate_psi
+except ImportError:
+    print("❌ Error: Could not locate main.py in the current directory.")
+    sys.exit(1)
+
+client = TestClient(app)
+
+def test_psi_calculation_logic():
+    print("🧪 Test 1: Verifying Mathematical PSI Calculations...")
+    expected = {"premium": 0.5, "free": 0.5}
+    actual_stable = ["premium", "free", "premium", "free"]
+    
+    stable_psi = calculate_psi(expected, actual_stable)
+    assert stable_psi < 0.1, f"Expected stable PSI, got {stable_psi}"
+    print(f"   ✅ Stable calculation passed (PSI: {stable_psi})")
+    
+    actual_drifted = ["free", "free", "free", "free", "free"]
+    drifted_psi = calculate_psi(expected, actual_drifted)
+    assert drifted_psi >= 0.2, f"Expected critical drift PSI, got {drifted_psi}"
+    print(f"   ✅ Drifted calculation successfully tripped threshold (PSI: {drifted_psi})")
+
+def test_fastapi_gateway_endpoints():
+    print("\n🧪 Test 2: Verifying Live Gateway HTTP REST Operations...")
+    health_response = client.get("/healthz")
+    assert health_response.status_code == 200
+    assert health_response.json()["status"] == "healthy"
+    print("   ✅ /healthz health check endpoint operational.")
+
+    payload = {
+        "threshold": 0.1,
+        "baseline": [
+            {"feature_name": "user_tier", "expected_distribution": {"premium": 0.70, "free": 0.30}}
+        ],
+        "inference_data": [
+            {"user_tier": "premium"}, {"user_tier": "free"}, {"user_tier": "free"}
+        ]
+    }
+    
+    response = client.post("/api/v1/verify-drift", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "SUCCESS"
+    print("   ✅ /api/v1/verify-drift structural verification passed.")
+
+def test_dashboard_compilation_syntax():
+    print("\n🧪 Test 3: Checking Dashboard Structural Code Integration...")
+    try:
+        result = subprocess.run(
+            [sys.executable, "-m", "py_compile", "app.py"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        if result.returncode == 0:
+            print("   ✅ app.py compilation check passed. Streamlit elements clean.")
+        else:
+            print(f"   ❌ app.py compilation failed:\n{result.stderr}")
+            sys.exit(1)
+    except FileNotFoundError:
+        print("   ❌ Error: app.py file not found in project directory.")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    print("=======================================================")
+    print("🛡️  Starting Complete Testing Operations: No-Drift API Suite")
+    print("=======================================================")
+    
+    start_time = time.time()
+    test_psi_calculation_logic()
+    test_fastapi_gateway_endpoints()
+    test_dashboard_compilation_syntax()
+    
+    duration = round(time.time() - start_time, 2)
+    print("=======================================================")
+    print(f"🎉 SUCCESS: All component tests passed cleanly in {duration} seconds!")
+    print("=======================================================")
