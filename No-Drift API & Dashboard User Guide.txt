@@ -1,0 +1,71 @@
+No-Drift API & Dashboard User Guide
+emoji: 🛡️
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+---
+
+# No-Drift API: Developer User Guide
+
+Welcome to the **No-Drift API** ecosystem. This guide is designed to help beginning developers understand how to utilize our gateway and benchmark dashboard to maintain model integrity.
+
+## 1. Introduction
+The No-Drift API is an analytical proxy. It monitors the statistical "health" of data flowing into your AI models. If your model's input data shifts significantly from the baseline it was trained on (a phenomenon called "drift"), this API alerts you or triggers a circuit breaker to prevent errors.
+
+## 2. Setting Up Your Development Environment
+Before you begin, ensure you have Python 3.11+ installed.
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/pigscanfly1/No-Drift.git](https://github.com/pigscanfly1/No-Drift.git)
+   cd No-Drift
+
+   **Install dependencies**
+   pip install -r requirements.txt
+
+   **Launch the Dashboard**
+   streamlit run app.py
+   
+
+## 3. Using the Dashboard
+The dashboard allows you to visualize drift without writing code.
+
+Upload: Use the sidebar to upload a CSV/JSON file of your production data.
+
+Configure: Set your Circuit Breaker Threshold. A lower number (e.g., 0.05) is very sensitive; a higher number (e.g., 0.20) only triggers on major data shifts.
+
+Evaluate: Click "Run Live Comparative Test" to see how the No-Drift API protects your model performance compared to a raw, unprotected version.
+
+
+## 4. Integrating the API
+If you are building an application, you can query the API directly via HTTP.
+
+Endpoint: POST /api/v1/verify-drift
+Send your baseline and your new data, and the API will return a stability score (PSI).
+
+Example Payload:
+
+{
+  "threshold": 0.1,
+  "baseline": [
+    {
+      "feature_name": "user_tier",
+      "expected_distribution": {"premium": 0.7, "free": 0.3}
+    }
+  ],
+  "inference_data": [
+    {"user_tier": "premium"}, 
+    {"user_tier": "free"}
+  ]
+}
+
+## 5. Licensing & Contribution
+Research/Personal: You are free to use this for learning and testing.
+
+Commercial: If you intend to use this in a commercial product, please contact Mozart Software Architects and Muhammad Abdullah for a license.
+
+Contributions: We welcome your code fixes! By submitting them, you agree to grant Mozart Software Architects and Muhammad Abdullah rights to use those improvements.
+"""
+
+with open("USER_GUIDE.md", "w") as f:
+f.write(user_guide_content)

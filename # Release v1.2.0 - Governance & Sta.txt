@@ -1,0 +1,22 @@
+# Release v1.2.0 - Governance & Stability Engine
+
+## Overview
+This release marks the stable production-ready iteration of the No-Drift API. Version 1.2.0 introduces a formal governance framework, optimized mathematical drift detection, and a unified Streamlit dashboard for real-time model monitoring.
+
+## Key Features & Improvements
+*   **PSI Stability Engine:** Implemented a robust Population Stability Index (PSI) calculation module with mathematical smoothing to prevent runtime exceptions.
+*   **Unified Dashboard:** Integrated the dashboard into `app.py`, optimized for Hugging Face Spaces (Streamlit SDK).
+*   **Governance Gateway:** Added strict schema validation and structural circuit-breaker logic to the `/api/v1/verify-drift` endpoint.
+*   **CI/CD Pipeline:** Refactored deployment workflows for seamless GitHub-to-Hugging Face synchronization.
+*   **Testing Suite:** Included `run_all_tests.py` for comprehensive E2E validation.
+
+## Licensing & Compliance
+This release operates under the **Public Evaluation & Commercial Compliance License**. 
+*   **Open Source & Research:** Free for academic research, personal testing, and open-source infrastructure validation.
+*   **Commercial Use:** Requires a formal licensing agreement from Mozart Software Architects and Muhammad Abdullah.
+*   **Inbound Contributions:** All contributions are subject to the project's CLA, granting perpetual, royalty-free usage rights to Mozart Software Architects and Muhammad Abdullah.
+
+## Installation
+```bash
+pip install -r requirements.txt
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
